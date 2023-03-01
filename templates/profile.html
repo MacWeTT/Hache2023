@@ -2,12 +2,14 @@
 
 {%block content%}
 
-<h1>User Profile</h1>
-<form method="post" enctype="multipart/form-data">
-    {%csrf_token%}
-    {{u_form.as_p}}
-    {{p_form.as_p}}
-    <br>
-    <input type="submit" value="Update">
-</form>
+<h1>{{profile.user.username}}'s Profile</h1>
+<p>{{profile.name}}</p>
+<p>{{profile.user.email}}</p>
+<p>{{profile.bio}}</p>
+<h3>
+    <a href="{%url 'editprofile' %}">
+        Update Profile
+    </a>
+</h3>
+
 {%endblock%}

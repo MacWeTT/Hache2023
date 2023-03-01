@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
+from .models import Profile
 from django.contrib.auth import authenticate, login, logout
 from .forms import MyUserCreationForm, UserProfileForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
@@ -64,8 +65,15 @@ def HomePage(request):
     return render(request, 'home.html')
 
 
+def ViewProfile(request,username):
+    user = User.objects.get(username=username)  
+    profile = Profile.objects.get(user=user)
+    context = {'profile':profile}
+    return render(request,'profile.html',context)
+
 @login_required(login_url='login')
-def Profile(request):
+def EditProfile(request):
+    user = request.user
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
@@ -73,13 +81,10 @@ def Profile(request):
             u_form.save()
             p_form.save()
             messages.success(request,'Your profile has been updated.')
-            return redirect('profile')
+            return redirect('profile',username=user.username)
     else:
         u_form = UserUpdateForm(instance=request.user) 
         p_form = UserProfileForm(instance=request.user.profile)
         
     context = {'u_form': u_form,'p_form':p_form}
-    return render(request,'profile.html',context)
-
-def EditProfile(request):
     return render(request, 'editprofile.html',context)

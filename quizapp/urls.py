@@ -5,8 +5,9 @@ urlpatterns = [
     path('signup/', views.SignUpPage, name='signup'),
     path('login/', views.LoginPage, name='login'),
     path('logout/',views.LogoutUser, name = 'logout'),
-    path('profile/',views.Profile, name='profile'),
+    path('profile/<str:username>/',views.ViewProfile, name='profile'),
+    path('edit-profile/',views.EditProfile, name='editprofile'),
     
     path('',views.Landing, name='landing'),
-    path('home',views.HomePage, name="home"),
+    path('home/',views.HomePage, name="home"),
 ]
