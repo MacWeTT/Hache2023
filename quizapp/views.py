@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .forms import MyUserCreationForm
+from .forms import MyUserCreationForm, UserProfileForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
 
 def Landing(request):
@@ -38,18 +38,24 @@ def LogoutUser(request):
     return redirect('home')
 
 def SignUpPage(request):
-    form = MyUserCreationForm()
     
     if request.method == "POST":
         form = MyUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.save()
+            user = form.save()
+            
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
             login(request,user)
+            messages.success(request,"Sign Up completed successfully.")
             return redirect('home')
         else:
             messages.error(request,'An error occured. Check if passwords match.')
-    
+            
+    else:
+        form = MyUserCreationForm() 
+        
     context = {"form":form}
     return render(request, 'signup.html', context)
 
@@ -60,4 +66,20 @@ def HomePage(request):
 
 @login_required(login_url='login')
 def Profile(request):
-    return render(request,'profile.html')
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request,'Your profile has been updated.')
+            return redirect('profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user) 
+        p_form = UserProfileForm(instance=request.user.profile)
+        
+    context = {'u_form': u_form,'p_form':p_form}
+    return render(request,'profile.html',context)
+
+def EditProfile(request):
+    return render(request, 'editprofile.html',context)

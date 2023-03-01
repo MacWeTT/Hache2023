@@ -2,5 +2,12 @@
 
 {%block content%}
 
-<h1>Profile Template</h1>
+<h1>User Profile</h1>
+<form method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+    {{u_form.as_p}}
+    {{p_form.as_p}}
+    <br>
+    <input type="submit" value="Update">
+</form>
 {%endblock%}
