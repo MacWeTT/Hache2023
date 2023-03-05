@@ -10,4 +10,6 @@ urlpatterns = [
     
     path('',views.Landing, name='landing'),
     path('home/',views.HomePage, name="home"),
+    
+    path ('quiz/<str:pk>', views.Quiz, name='quiz')
 ]
