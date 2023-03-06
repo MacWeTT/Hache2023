@@ -11,7 +11,7 @@ class Profile(models.Model):
     avatar = models.ImageField(
         null=True, default="avatar.png", upload_to='user_data')
 
-    def question_count(self):
+    def question_count():
         return Question.objects.all().count()
 
     # Question Information
@@ -19,12 +19,13 @@ class Profile(models.Model):
     score = models.IntegerField(default=0)
     total_questions = models.IntegerField(
         verbose_name="Total Questions", default=question_count)
+    correct = models.IntegerField(default=0)
     winner = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
     lastQuestionTime = models.DateTimeField(null=True, blank=True)
 
     class Meta:
-        ordering = ['score']
+        ordering = ['-score']
 
     def __str__(self):
         return self.user.username
@@ -41,7 +42,7 @@ class Profile(models.Model):
 
 class Question(models.Model):
     question = models.TextField()
-    answer = models.CharField(max_length=200, null=False)
+    answer = models.CharField(max_length=200, null=True)
     hint = models.CharField(max_length=200, null=True, blank=True)
     asset = models.URLField(
         max_length=500, verbose_name='assets', null=True, blank=True)

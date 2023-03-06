@@ -1,14 +1,29 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, inputQuestions, Question
 from django.contrib.auth import authenticate, login, logout
-from .forms import MyUserCreationForm, UserProfileForm, UserUpdateForm
+from .forms import MyUserCreationForm, UserProfileForm, UserUpdateForm, AnswerForm
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.shortcuts import HttpResponse
+from django.urls import reverse_lazy
+from datetime import datetime, timedelta
+
+import random
+import time
+import pytz
+
+
+IST = pytz.timezone('Asia/Kolkata')
 
 
 def Landing(request):
     return render(request, 'landing.html')
+
+
+# def is_ajax(request):
+#     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 
 def LoginPage(request):
@@ -97,8 +112,112 @@ def EditProfile(request):
     return render(request, 'editprofile.html', context)
 
 
-@login_required(login_url='login')
-def Quiz(request):
-    profile = request.user.profile
+# Request Messages
+requestMessages = [
+    'helpme',
+    'nhihora'
+]
 
-    return render(request, 'quiz.html', context)
+randomMessages = [
+    'Think Harder!',
+    'Aaj aaj mei hojaega?'
+]
+
+
+@login_required
+def checkForWin(profile):
+    if profile.correct == profile.total_questions:
+        profile.winner = True
+        profile.save()
+        return True
+    else:
+        return False
+
+
+@login_required
+def WinnerView(request):
+    winner = request.user.profile.winner
+    if winner:
+        return render(request, 'winner.html')
+    else:
+        return redirect('/')
+
+
+@login_required
+def getObj(profile):
+    questionObj = Question.objects.get(questionNumber=profile.question_id)
+    return questionObj
+
+
+@login_required(login_url='login')
+def QuizView(request):
+    profile = request.user.profile
+    old_id = profile.question_id
+
+    if request.method == "POST":
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            userAnswer = form.cleaned_data.get('answer')
+            if userAnswer != None:
+                try:
+                    inputQuestions.objects.create(
+                        user=profile.user,
+                        textQuestion=profile.question_id,
+                        textAnswer=userAnswer,
+                        textIP=request.META.get("REMOTE_ADDR")
+                    )
+                finally:
+                    pass
+                if userAnswer.lower() in requestMessages:
+                    em = [
+                        'contact @MacWeTT with screenshot.'
+                    ]
+                if userAnswer.lower().startswith("flag{") != True:
+                    data = {'correct': False,
+                            'errorM': "Submit in format Flag{Your_Answer}"}
+                    return JsonResponse(data)
+                else:
+                    correctAnswer = getObj(profile).answer
+                    if userAnswer.lower() == correctAnswer.lower():
+                        profile.question_id += 1
+                        profile.score += 10
+                        profile.correct += 1
+                        profile.lastQuestionTime = datetime.now(tz=IST)
+                        profile.save()
+                    winner = checkForWin(profile)
+                    if winner:
+                        data = {"winner": winner}
+                    else:
+                        profileObj = getObj(profile)
+                        question = {'text': profileObj.question}
+                        if (profile.lastQuestionTime != None):
+                            print(datetime.now(tz=IST) -
+                                  profile.lastQuestionTime)
+                        if (profile.question_id == old_id):
+                            message = random.choice(randomMessages)
+                            data = {'question': question, 'winner': winner,
+                                    'correct': False, 'errorMsg': message}
+                        else:
+                            data = {'question': question,
+                                    'winner': winner, 'correct': True}
+                    return JsonResponse(data)
+            else:
+                data = {'None': 'Yes'}
+                return JsonResponse(data)
+        else:
+            data = {'None': 'Yes'}
+            return JsonResponse(data)
+    else:
+        if checkForWin(profile):
+            return redirect(reverse_lazy('winner'))
+        form = AnswerForm()
+        profileObj = getObj(profile)
+        question = {'text': profileObj.question, 'asset': profileObj.asset,
+                    'questionNum': profileObj.questionNumber}
+        hint = profileObj.hint
+        if hint:
+            context = {'question': question, 'form': form, 'hint': hint}
+            return render(request, 'quiz.html', context)
+        else:
+            context = {'question': question, 'form': form}
+            return render(request, 'quiz.html', context)

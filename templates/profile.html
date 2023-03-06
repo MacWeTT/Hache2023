@@ -7,6 +7,23 @@
 <p>{{profile.user.email}}</p>
 <p>CTF's Captured: {{profile.}}</p>
 <p>{{profile.bio}}</p>
+
+<h2>Quiz Analysis</h2>
+
+{%if profile.winner %}
+<p>Winner</p>
+{%else %}
+<p>Still in the game</p>
+{%endif%}
+
+{%if profile.verified %}
+<p>Verified</p>
+{%else %}
+<p>Not Verified</p>
+{%endif%}
+
+<p>Score : {{profile.score}}</p>
+<p>Last Question Time: {{profile.lastQuestionTime}}</p>
 <h3>
     <a href="{%url 'editprofile' %}">
         Update Profile
