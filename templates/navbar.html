@@ -1,4 +1,37 @@
+{%load static%}
 <nav>
+    <div class="acm-logo">
+        {%if user.is_authenticated%}
+        <a href="{%url 'home'%}">
+            <img src="{%static 'assets/images/acm.svg'%}" alt="ACM JUIT">
+        </a>
+        {%else%}
+        <a href="{%url 'landing'%}">
+            <img src="{%static 'assets/images/acm.svg'%}" alt="ACM JUIT">
+        </a>
+        {%endif%}
+    </div>
+    <div class="nav-links-main">
+        <div class="nav-link"><a href="{%url 'rules'%}">Rules</a></div>
+        <div class="nav-link"><a href="{%url 'hackerboard'%}">Hackerboard</a></div>
+        {%if user.is_authenticated%}
+        <div class="nav-link"><a href="{%url 'quiz'%}">Quiz</a></div>
+        {%endif%}
+    </div>
+    <div class="nav-links-user">
+        {%if user.is_authenticated%}
+        <div class="avatar">
+            <a href="{%url 'profile' username=user.username%}"><img src="{{user.profile.avatar.url}}"
+                    alt="{{user.username}}"></a>
+        </div>
+        <div class="nav-link"><a href="{%url 'logout'%}">Logout</a></div>
+        {%else%}
+        <div class="nav-link"><a href="{%url 'login'%}">Login</a></div>
+        <div class="nav-link"><a href="{%url 'signup'%}">SignUp</a></div>
+        {%endif%}
+    </div>
+</nav>
+<!-- <nav>
     <h2 style="display: flex; justify-content: space-between;">
         <a href="{%url 'landing'%}">HACHE</a>
 
@@ -15,4 +48,4 @@
         <a href="{%url 'home'%}">Home</a>
 
     </h2>
-</nav>
+</nav> -->

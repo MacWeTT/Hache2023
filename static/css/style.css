@@ -1,0 +1,282 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: black;
+    color: white;
+    font-family: 'Chakra Petch', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 16px;
+}
+
+.acm-logo {
+    display: flex;
+    width: 10vw;
+}
+
+.acm-logo a {
+    width: 10vw;
+}
+
+.acm-logo a>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-links-main,
+.nav-links-user {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+}
+
+.avatar a {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.avatar a>img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: 0.3s ease-in-out;
+}
+
+.avatar a>img:hover {
+    border: 2px solid white;
+}
+
+.nav-link {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-link a,
+.other-link {
+    margin: 10px;
+    padding: 10px;
+    font-size: 18px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-link a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-link a:hover,
+.other-link:hover {
+    border: 2px solid white;
+    /* transition: 0.3s ease-in-out; */
+    cursor: pointer;
+}
+
+/* Landing-Main */
+main {
+    display: flex;
+    justify-content: space-around;
+}
+
+main>div {
+    height: 60vh;
+}
+
+.main-logo>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    /* text-align: center; */
+}
+
+.countdown {
+    display: flex;
+    flex-direction: column;
+}
+
+.countdown h1 {
+    text-align: center;
+}
+
+.countdown-main ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+}
+
+.countdown-main ul li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 18px;
+    font-weight: 500;
+    font-size: larger;
+    min-width: 6rem;
+}
+
+.countdown-main ul li span {
+    font-size: 56px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+/* Footer */
+footer {
+    display: flex;
+    justify-content: center;
+
+    min-height: 10vh;
+    align-items: center;
+}
+
+/* Rules */
+.rules {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    max-width: 90vw;
+    margin: auto auto;
+    font-size: 18px;
+}
+
+.rule-container ul li {
+    text-decoration: none;
+    list-style: inside;
+}
+
+/* Profile */
+.profile {
+    min-height: 50vh;
+    max-height: 80vh;
+    width: 70vw;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.076) 22.36%, rgba(255, 255, 255, 0.126) 42.79%, rgba(255, 255, 255, 0.08) 72.78%);
+    border-radius: 17px;
+    margin: 0 auto;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-details {
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+}
+
+.profile_user-avatar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profile_user-avatar img {
+    width: 100px;
+    height: 100px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.profile_quiz-details h3 {
+    display: inline-block;
+    margin: 20px 0;
+}
+
+.profile_quiz-details h3 a {
+    margin: 0;
+    cursor: pointer;
+}
+
+/* Quiz */
+.quiz {
+    max-width: 70vw;
+    max-height: 60vh;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.076) 22.36%, rgba(255, 255, 255, 0.126) 42.79%, rgba(255, 255, 255, 0.08) 72.78%);
+    border-radius: 17px;
+    padding: 40px;
+}
+
+.quiz h1 {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.quiz h2 {
+    display: inline-block;
+    font-size: 24px;
+    text-align: center;
+    margin: 18px auto;
+    color: blue;
+    cursor: pointer;
+}
+
+form label {
+    font-size: 24px;
+    /* text-align: center; */
+    margin: 18px auto;
+    color: blue;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+form input>text {
+    width: 60vw;
+    padding: 20px;
+}
+
+.quiz p {
+    font-size: 18px;
+}
+
+/* Leaderboard */
+thead th {
+    position: sticky;
+    top: -1px;
+}
+
+.tableContainer {
+    overflow-y: auto;
+}
+
+@media screen and (max-width: 780px) {
+    #myChartOK {
+        display: none !important;
+    }
+}

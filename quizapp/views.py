@@ -22,6 +22,15 @@ def Landing(request):
     return render(request, 'landing.html')
 
 
+def Rules(request):
+    return render(request, 'rules.html')
+
+
+def Hackerboard(request):
+    context = {}
+    return render(request, 'hackerboard.html', context)
+
+
 # def is_ajax(request):
 #     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
