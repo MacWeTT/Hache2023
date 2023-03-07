@@ -55,7 +55,6 @@ document.querySelector('.check').addEventListener("click", (e) => {
 });
 
 function checkAnswer(e) {
-    // document.getElementById('button-check');
     let form = $('#answer-form');
     $('#answer-form #id_answer').val($('#temp-ans').val());
     $.ajax({
