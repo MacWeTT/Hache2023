@@ -211,11 +211,11 @@ def QuizView(request):
                                     'winner': winner, 'correct': True}
                     return JsonResponse(data)
             else:
-                data = {'None': 'Yes'}
+                data = {'None': 'Galti'}
                 return JsonResponse(data)
         else:
             data = {'None': 'Yes'}
-            return JsonResponse(data)
+            json = JsonResponse(data)
     else:
         if checkForWin(profile):
             return redirect(reverse_lazy('winner'))

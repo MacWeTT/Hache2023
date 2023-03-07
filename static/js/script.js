@@ -17,44 +17,49 @@
 // }, 1000);
 
 
-// Quiz Toast Notifications and working logic
+const answerField = document.getElementById("temp-ans");
 const hint = document.getElementById("hint").textContent;
+
 try {
     document.getElementById('buttonHint').addEventListener('click', () => {
         iziToast.info({
             title: 'Hint',
             message: hint,
             position: 'bottomCenter',
-            timeout: 5000,
-            closeOnClick: false,
-            closeOnEscape: true,
+            timeout: false,
+            closeOnClick: true,
             buttons: [
-                ['<button>Click to Copy</button>', () => {
+                ['<button>Click to Copy</button>', function (instance, toast) {
                     navigator.clipboard.writeText(hint);
                 }, true],
             ],
         });
     })
 } catch (err) {
-    console.log("No hint exists.");
+    console.log("Error occured.")
 }
 
-const answerField = document.getElementById('user-input');
-answerField.addEventListener('keyup', check);
-function check(e) {
-    const val = answerField.value;
-    if (e.keyCode == 13 && val) {
-        e.preventDefault();
-        checkAnswer(e);
-    }
-}
+
+
 document.querySelector('.check').addEventListener("click", (e) => {
     if (answerField.value) {
-        checkAnswer(e);
+        check(e)
     }
 });
 
-function checkAnswer(e) {
+answerField.addEventListener("keyup", nice)
+
+function nice(e) {
+    const val = answerField.value
+
+    if (e.keyCode === 13 && val) {
+        e.preventDefault();
+
+        check(e);
+    }
+}
+function check(e) {
+    document.getElementById("button-addon2").style.display === "none";
     let form = $('#answer-form');
     $('#answer-form #id_answer').val($('#temp-ans').val());
     $.ajax({
@@ -62,14 +67,13 @@ function checkAnswer(e) {
         url: form.attr("action"),
         data: form.serialize(),
         success: function (response) {
-            console.log(response)
             const response_div = document.getElementById("response");
             if (response.winner === true) {
                 location.reload();
             }
             else {
                 if (response.correct === true) {
-                    document.getElementById("button-check").disabled = false;
+                    document.getElementById("button-addon2").disabled = false;
                     iziToast.success({
                         title: 'Correct',
                         message: 'Great, Fetching Your Next Question !',
@@ -77,19 +81,21 @@ function checkAnswer(e) {
                     setTimeout(() => location.reload(), 2000);
                 }
                 else if (response.correct === false) {
-                    document.getElementById("button-check").disabled = false;
+                    document.getElementById("button-addon2").disabled = false;
                     if (response.customCode == 20) {
                         iziToast.warning({
                             position: 'topRight',
                             title: 'Gift For You!',
                             buttons: [
+
                                 ['<button>Click Here</button>', function (instance, toast) {
                                     window.location.replace(response.errorM);
                                 }, true]
                             ]
                         });
+
                     } else if (response.customCode == 10) {
-                        createBalloons(10);
+                        createBalloons(10)
                     } else {
                         iziToast.warning({
                             position: 'topRight',
@@ -97,20 +103,17 @@ function checkAnswer(e) {
                             message: response.errorM,
                         });
                     }
+
+
+
                     $('#answer-form').trigger('reset');
                     $('#temp-ans').val('');
                     setTimeout(() => response_div.innerHTML = "", 3000);
                 }
-                else if (response.None === "Yes") {
-                    iziToast.error({
-                        position: 'topLeft',
-                        message: response.errorM,
-                    });
-                }
                 else {
                     iziToast.error({
                         position: 'topRight',
-                        message: "Error occured.",
+                        message: "Error!",
                     });
                 }
             }
@@ -123,86 +126,14 @@ function checkAnswer(e) {
             });
         }
     });
-
 }
-// const answerField = document.getElementById("temp-ans");
-// answerField.addEventListener("keyup", nice);
-// function nice(e) {
-//     const val = answerField.value;
-//     if (e.keyCode === 13 && val) {
-//         e.preventDefault();
-//         check(e);
-//     }
-// }
-// function check(e) {
-//     document.getElementById("button-check").style.display === "none";
-//     let form = $('#answer-form');
-//     $('#answer-form #id_answer').val($('#temp-ans').val());
-//     $.ajax({
-//         type: 'POST',
-//         url: form.attr("action"),
-//         data: form.serialize(),
-//         success: function (response) {
-//             const response_div = document.getElementById("response");
-//             if (response.winner === true) {
-//                 location.reload();
-//             }
-//             else {
-//                 if (response.correct === true) {
-//                     document.getElementById("button-check").disabled = false;
-//                     iziToast.success({
-//                         title: 'Correct',
-//                         message: 'Great, Fetching Your Next Question !',
-//                     });
-//                     setTimeout(() => location.reload(), 2000);
-//                 }
-//                 else if (response.correct === false) {
-//                     document.getElementById("button-check").disabled = false;
-//                     if (response.customCode == 20) {
-//                         iziToast.warning({
-//                             position: 'topRight',
-//                             title: 'Gift For You!',
-//                             buttons: [
-//                                 ['<button>Click Here</button>', function (instance, toast) {
-//                                     window.location.replace(response.errorM);
-//                                 }, true]
-//                             ]
-//                         });
-//                     } else if (response.customCode == 10) {
-//                         createBalloons(10);
-//                     } else {
-//                         iziToast.warning({
-//                             position: 'topRight',
-//                             title: 'Incorrect',
-//                             message: response.errorM,
-//                         });
-//                     }
-//                     $('#answer-form').trigger('reset');
-//                     $('#temp-ans').val('');
-//                     setTimeout(() => response_div.innerHTML = "", 3000);
-//                 }
-//                 else {
-//                     iziToast.error({
-//                         position: 'topRight',
-//                         message: "Error occured.",
-//                     });
-//                 }
-//             }
-//         },
-//         error: function (response) {
-//             console.log(response)
-//             iziToast.error({
-//                 position: 'topRight',
-//                 message: "Error!",
-//             });
-//         }
-//     });
-// }
+
 
 
 function random(num) {
     return Math.floor(Math.random() * num)
 }
+
 function getRandomStyles() {
     var r = random(255);
     var g = random(255);
@@ -218,6 +149,7 @@ function getRandomStyles() {
     animation: float ${dur}s ease-in infinite
     s`
 }
+
 function createBalloons(num) {
     var balloonContainer = document.getElementById("balloon-container")
     for (var i = num; i > 0; i--) {
@@ -226,11 +158,17 @@ function createBalloons(num) {
         balloon.id = `balloon${i}`
         balloon.style.cssText = getRandomStyles(); balloonContainer.append(balloon);
     }
+
     setTimeout(deleteballons, 6000);
+
 }
+
 function deleteballons() {
     for (var i = 10; i > 0; i--) {
         var balloon = document.getElementById(`balloon${i}`)
         balloon.remove()
     }
 }
+
+
+
