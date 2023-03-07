@@ -124,12 +124,13 @@ def EditProfile(request):
 # Request Messages
 requestMessages = [
     'helpme',
-    'nhihora'
+    'nhihora',
 ]
 
 randomMessages = [
     'Think Harder!',
-    'Aaj aaj mei hojaega?'
+    'Aaj aaj mei hojaega?',
+    'Thoda koshish toh karlo bhai',
 ]
 
 
@@ -178,9 +179,16 @@ def QuizView(request):
                 finally:
                     pass
                 if userAnswer.lower() in requestMessages:
-                    em = [
+                    print("hello")
+                    team = [
                         'contact @MacWeTT with screenshot.'
+                        'contact @Aman with screenshot.'
+                        'contact @Amritansh with screenshot.'
+                        'contact @Suvrt with screenshot.'
                     ]
+                    data = {'correct': False,
+                            'errorM': random.choice(team)}
+                    return JsonResponse(data)
                 if userAnswer.lower().startswith("flag{") != True:
                     data = {'correct': False,
                             'errorM': "Submit in format Flag{Your_Answer}"}
@@ -205,7 +213,7 @@ def QuizView(request):
                         if (profile.question_id == old_id):
                             message = random.choice(randomMessages)
                             data = {'question': question, 'winner': winner,
-                                    'correct': False, 'errorMsg': message}
+                                    'correct': False, 'errorM': message}
                         else:
                             data = {'question': question,
                                     'winner': winner, 'correct': True}
@@ -215,7 +223,7 @@ def QuizView(request):
                 return JsonResponse(data)
         else:
             data = {'None': 'Yes'}
-            json = JsonResponse(data)
+            return JsonResponse(data)
     else:
         if checkForWin(profile):
             return redirect(reverse_lazy('winner'))

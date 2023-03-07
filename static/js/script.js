@@ -1,25 +1,7 @@
-// var countDownDate = new Date("March 26, 2023 10:00:00").getTime();
-
-// var x = setInterval(function () {
-
-//     // Get today's date and time
-//     var now = new Date().getTime();
-
-//     // Find the distance between now and the count down date
-//     var distance = countDownDate - now;
-
-//     // Time calculations for days, hours, minutes and seconds
-//     document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-//     document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-//     document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-//     document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
-//     // If the count down is over, write some text
-// }, 1000);
 
 
-const answerField = document.getElementById("temp-ans");
+const answerField = document.getElementById("user-input");
 const hint = document.getElementById("hint").textContent;
-
 try {
     document.getElementById('buttonHint').addEventListener('click', () => {
         iziToast.info({
@@ -38,30 +20,23 @@ try {
 } catch (err) {
     console.log("Error occured.")
 }
-
-
-
 document.querySelector('.check').addEventListener("click", (e) => {
     if (answerField.value) {
         check(e)
     }
 });
-
 answerField.addEventListener("keyup", nice)
-
 function nice(e) {
     const val = answerField.value
-
     if (e.keyCode === 13 && val) {
         e.preventDefault();
-
         check(e);
     }
 }
 function check(e) {
-    document.getElementById("button-addon2").style.display === "none";
+    document.getElementById("button-check").style.display === "none";
     let form = $('#answer-form');
-    $('#answer-form #id_answer').val($('#temp-ans').val());
+    $('#answer-form #id_answer').val($('#user-input').val());
     $.ajax({
         type: 'POST',
         url: form.attr("action"),
@@ -73,7 +48,7 @@ function check(e) {
             }
             else {
                 if (response.correct === true) {
-                    document.getElementById("button-addon2").disabled = false;
+                    document.getElementById("button-check").disabled = false;
                     iziToast.success({
                         title: 'Correct',
                         message: 'Great, Fetching Your Next Question !',
@@ -81,7 +56,7 @@ function check(e) {
                     setTimeout(() => location.reload(), 2000);
                 }
                 else if (response.correct === false) {
-                    document.getElementById("button-addon2").disabled = false;
+                    document.getElementById("button-check").disabled = false;
                     if (response.customCode == 20) {
                         iziToast.warning({
                             position: 'topRight',
@@ -107,7 +82,7 @@ function check(e) {
 
 
                     $('#answer-form').trigger('reset');
-                    $('#temp-ans').val('');
+                    $('#user-input').val('');
                     setTimeout(() => response_div.innerHTML = "", 3000);
                 }
                 else {
