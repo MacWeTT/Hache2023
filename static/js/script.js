@@ -58,11 +58,10 @@ function check(e) {
                 else if (response.correct === false) {
                     document.getElementById("button-check").disabled = false;
                     if (response.customCode == 20) {
-                        iziToast.warning({
-                            position: 'topRight',
-                            title: 'Gift For You!',
+                        iziToast.info({
+                            position: 'topLeft',
+                            title: 'Maybe try this?',
                             buttons: [
-
                                 ['<button>Click Here</button>', function (instance, toast) {
                                     window.location.replace(response.errorM);
                                 }, true]
@@ -71,16 +70,20 @@ function check(e) {
 
                     } else if (response.customCode == 10) {
                         createBalloons(10)
-                    } else {
+                    } else if (response.customCode == 30) {
+                        iziToast.error({
+                            position: 'topRight',
+                            title: 'Incorrect',
+                            message: response.errorM,
+                        });
+                    }
+                    else {
                         iziToast.warning({
                             position: 'topRight',
                             title: 'Incorrect',
                             message: response.errorM,
                         });
                     }
-
-
-
                     $('#answer-form').trigger('reset');
                     $('#user-input').val('');
                     setTimeout(() => response_div.innerHTML = "", 3000);

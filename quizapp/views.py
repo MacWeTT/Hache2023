@@ -134,6 +134,15 @@ randomMessages = [
 ]
 
 
+swears = [
+    'fuck',
+    'fuckyou',
+    'chutiya',
+    'madarchod',
+    'behenchod',
+]
+
+
 @login_required
 def checkForWin(profile):
     if profile.correct == profile.total_questions:
@@ -181,18 +190,29 @@ def QuizView(request):
                 if userAnswer.lower() in requestMessages:
                     print("hello")
                     team = [
-                        'contact @MacWeTT with screenshot.'
-                        'contact @Aman with screenshot.'
-                        'contact @Amritansh with screenshot.'
-                        'contact @Suvrt with screenshot.'
+                        'Contact @MacWeTT with screenshot.',
+                        'Contact @Aman with screenshot.',
+                        'Contact @Amritansh with screenshot.',
+                        'Contact @Suvrt with screenshot.',
                     ]
                     data = {'correct': False,
                             'errorM': random.choice(team)}
                     return JsonResponse(data)
+                elif userAnswer.lower() == "motivation" or userAnswer.lower() == "iloveyou":
+                    errorM = "But Little Motivation! <3"
+                    data = {'correct': False,
+                            'errorM': errorM, 'customCode': 10}
+                    return JsonResponse(data)
+                elif userAnswer.lower() in swears:
+                    errorM = "https://youtu.be/dQw4w9WgXcQ?t=1"
+                    data = {'correct': False,
+                            'errorM': errorM, 'customCode': 20}
+                    return JsonResponse(data)
                 if userAnswer.lower().startswith("flag{") != True:
                     data = {'correct': False,
-                            'errorM': "Submit in format Flag{Your_Answer}"}
+                            'errorM': "Submit in format: Flag{Your_Answer}"}
                     return JsonResponse(data)
+
                 else:
                     correctAnswer = getObj(profile).answer
                     if userAnswer.lower() == correctAnswer.lower():
@@ -219,10 +239,12 @@ def QuizView(request):
                                     'winner': winner, 'correct': True}
                     return JsonResponse(data)
             else:
-                data = {'None': 'Galti'}
+                data = {'correct': 'False',
+                        'errorM': 'Input Field is empty!', 'customCode': 30}
                 return JsonResponse(data)
         else:
-            data = {'None': 'Yes'}
+            data = {'correct': 'False',
+                    'errorM': 'Input Field is empty!', 'customCode': 30}
             return JsonResponse(data)
     else:
         if checkForWin(profile):

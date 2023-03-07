@@ -4,6 +4,23 @@
     box-sizing: border-box;
 }
 
+
+/* Material Icons */
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 300,
+        'GRAD' 0,
+        'opsz' 48;
+    transform: scale(1.5);
+}
+
+.icon {
+    position: absolute;
+    right: 5%;
+    top: 30%;
+}
+
 body {
     min-height: 100vh;
     background-color: black;
@@ -13,6 +30,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
 }
 
 /* Navbar */
@@ -20,15 +38,16 @@ nav {
     display: flex;
     justify-content: space-around;
     margin-top: 16px;
+    position: inherit;
 }
 
 .acm-logo {
     display: flex;
-    width: 10vw;
+    width: 10rem;
 }
 
 .acm-logo a {
-    width: 10vw;
+    width: max-content;
 }
 
 .acm-logo a>img {
