@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 import random
 import time
 import pytz
+import re
 
 
 IST = pytz.timezone('Asia/Kolkata')
@@ -27,7 +28,13 @@ def Rules(request):
 
 
 def Hackerboard(request):
-    context = {}
+    x = re.compile(r'<(.*?),(\d+)>')
+    leaders = Profile.objects.filter(user__is_staff=False)
+    dates_scores = []
+    for profile in leaders:
+        dates_scores.append({"username": profile.user.username, "data": x.findall(
+            profile.data), 'correct': profile.correct, 'finalScore': profile.score})
+    context = {"data": dates_scores}
     return render(request, 'hackerboard.html', context)
 
 
@@ -219,6 +226,9 @@ def QuizView(request):
                         profile.question_id += 1
                         profile.score += 10
                         profile.correct += 1
+                        profile.data += '<' + \
+                            str(datetime.now(tz=IST).isoformat()) + \
+                            ','+str(profile.score)+'>'
                         profile.lastQuestionTime = datetime.now(tz=IST)
                         profile.save()
                     winner = checkForWin(profile)

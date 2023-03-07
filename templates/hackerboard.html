@@ -1,5 +1,32 @@
 {%extends 'index.html'%}
+{% load static %}
+
+{%block style%}
+<script src="{%static 'js/chart.js'%}"></script>
+{%endblock style%}
+
+
 
 {%block content%}
-
-{%endblock%}
+<div class="hackerboard_chart_div">
+    <canvas id="myChart"></canvas>
+</div>
+<div class="hackerboard_table">
+    <table class="hackerboard">
+        <caption>User Stats</caption>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>CTF's Captured</th>
+                <th>Total Time Taken</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id='table'>
+        </tbody>
+    </table>
+</div>
+</div>
+{{ data|json_script:"board-data" }}
+{%endblock content%}

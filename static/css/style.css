@@ -146,6 +146,8 @@ main>div {
 .countdown {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .countdown h1 {
@@ -173,6 +175,34 @@ main>div {
     font-size: 56px;
     font-weight: bold;
     padding: 10px;
+}
+
+.term:after {
+    content: "_";
+    opacity: 1;
+    animation: cursor 1.5s infinite;
+}
+
+@keyframes cursor {
+    0% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 /* Footer */
@@ -284,18 +314,49 @@ form input>text {
     font-size: 18px;
 }
 
-/* Leaderboard */
-thead th {
-    position: sticky;
-    top: -1px;
+/* Hackerboard */
+
+.hackerboard_chart_div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 45vw;
 }
 
-.tableContainer {
-    overflow-y: auto;
+.hackerboard_table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+#myChart {
+    width: 20rem;
+}
+
+
+table {
+    text-align: center;
+}
+
+
+th {
+    border-bottom: 2px solid white;
+    padding: 8px;
+}
+
+td {
+    padding: 8px;
+}
+
+caption {
+    font-size: 24px;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
 
 @media screen and (max-width: 780px) {
-    #myChartOK {
+    .hackerboard_chart_div {
         display: none !important;
     }
 }

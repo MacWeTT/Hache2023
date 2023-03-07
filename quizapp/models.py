@@ -19,6 +19,7 @@ class Profile(models.Model):
     score = models.IntegerField(default=0)
     total_questions = models.IntegerField(
         verbose_name="Total Questions", default=question_count)
+    data = models.TextField(default="March 6, 2023 10:00:00")
     correct = models.IntegerField(default=0)
     winner = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)

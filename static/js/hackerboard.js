@@ -19,7 +19,7 @@ profiles.forEach((profile, index) => {
             };
             chartData.push(chat_data)
         }
-        profile.data[0][0] = "March 12, 2022 21:00:00"
+        profile.data[0][0] = "March 6, 2023 21:00:00"
         let starttime = new Date(profile.data[0][0])
         let endtime = new Date(profile.data[profile.data.length - 1][0])
 
@@ -46,28 +46,21 @@ profiles.forEach((profile, index) => {
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
     type: 'line',
+    aspectRatio: 1,
     data: {
         datasets: chartData
     },
     options: {
+        responsive: true,
         scales: {
-            yAxes: [{
-                type: 'linear'
-            }],
-            xAxes: [{
+            yAxis: { type: 'linear' },
+            xAxis: {
                 type: 'time',
-                distribution: 'series', // or linear
-                time: {
-                    unit: 'month',
-                    displayFormats: {
-                        month: 'MMM D h:mm a'
-                    },
-                    tooltipFormat: 'MMM D h:mm a'
-                }
-            }]
+            }
         }
     }
 });
+
 function timeDiffCalc(dateFuture, dateNow) {
     let diffInSeconds = Math.abs(dateFuture - dateNow) / 1000;
 
@@ -85,10 +78,10 @@ function timeDiffCalc(dateFuture, dateNow) {
         difference += (days === 1) ? `${days} day, ` : `${days} days, `;
     }
     if (hours > 0) {
-        difference += (hours === 0 || hours === 1) ? `${hours} hour, ` : `${hours} hours, `;
+        difference += (hours === 0 || hours === 1) ? `${hours} hr, ` : `${hours} hrs, `;
     }
 
-    difference += (minutes === 0 || minutes === 1) ? `${minutes} minute` : `${minutes} minutes`;
+    difference += (minutes === 0 || minutes === 1) ? `${minutes} min` : `${minutes} mins`;
 
     return difference;
 }
@@ -124,7 +117,7 @@ let table_html = ''
 newTableData.forEach((profile, idx) => {
     table_html += `
     <tr>
-        <th scope="row">${idx + 1}</th>
+        <td>${idx + 1}</td>
             <td>${profile.user}</td>
             <td>${profile.solved}</td>
             <td>${profile.time}</td>
