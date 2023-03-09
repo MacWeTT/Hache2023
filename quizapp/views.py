@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 import random
 import time
 import pytz
+import re
 
 
 IST = pytz.timezone('Asia/Kolkata')
@@ -20,6 +21,21 @@ IST = pytz.timezone('Asia/Kolkata')
 
 def Landing(request):
     return render(request, 'landing.html')
+
+
+def Rules(request):
+    return render(request, 'rules.html')
+
+
+def Hackerboard(request):
+    x = re.compile(r'<(.*?),(\d+)>')
+    leaders = Profile.objects.filter(user__is_staff=False)
+    dates_scores = []
+    for profile in leaders:
+        dates_scores.append({"username": profile.user.username, "data": x.findall(
+            profile.data), 'correct': profile.correct, 'finalScore': profile.score})
+    context = {"data": dates_scores}
+    return render(request, 'hackerboard.html', context)
 
 
 # def is_ajax(request):
@@ -115,12 +131,22 @@ def EditProfile(request):
 # Request Messages
 requestMessages = [
     'helpme',
-    'nhihora'
+    'nhihora',
 ]
 
 randomMessages = [
     'Think Harder!',
-    'Aaj aaj mei hojaega?'
+    'Aaj aaj mei hojaega?',
+    'Thoda koshish toh karlo bhai',
+]
+
+
+swears = [
+    'fuck',
+    'fuckyou',
+    'chutiya',
+    'madarchod',
+    'behenchod',
 ]
 
 
@@ -169,19 +195,40 @@ def QuizView(request):
                 finally:
                     pass
                 if userAnswer.lower() in requestMessages:
-                    em = [
-                        'contact @MacWeTT with screenshot.'
+                    print("hello")
+                    team = [
+                        'Contact @MacWeTT with screenshot.',
+                        'Contact @Aman with screenshot.',
+                        'Contact @Amritansh with screenshot.',
+                        'Contact @Suvrt with screenshot.',
                     ]
+                    data = {'correct': False,
+                            'errorM': random.choice(team)}
+                    return JsonResponse(data)
+                elif userAnswer.lower() == "motivation" or userAnswer.lower() == "iloveyou":
+                    errorM = "But Little Motivation! <3"
+                    data = {'correct': False,
+                            'errorM': errorM, 'customCode': 10}
+                    return JsonResponse(data)
+                elif userAnswer.lower() in swears:
+                    errorM = "https://youtu.be/dQw4w9WgXcQ?t=1"
+                    data = {'correct': False,
+                            'errorM': errorM, 'customCode': 20}
+                    return JsonResponse(data)
                 if userAnswer.lower().startswith("flag{") != True:
                     data = {'correct': False,
-                            'errorM': "Submit in format Flag{Your_Answer}"}
+                            'errorM': "Submit in format: Flag{Your_Answer}"}
                     return JsonResponse(data)
+
                 else:
                     correctAnswer = getObj(profile).answer
                     if userAnswer.lower() == correctAnswer.lower():
                         profile.question_id += 1
                         profile.score += 10
                         profile.correct += 1
+                        profile.data += '<' + \
+                            str(datetime.now(tz=IST).isoformat()) + \
+                            ','+str(profile.score)+'>'
                         profile.lastQuestionTime = datetime.now(tz=IST)
                         profile.save()
                     winner = checkForWin(profile)
@@ -196,16 +243,18 @@ def QuizView(request):
                         if (profile.question_id == old_id):
                             message = random.choice(randomMessages)
                             data = {'question': question, 'winner': winner,
-                                    'correct': False, 'errorMsg': message}
+                                    'correct': False, 'errorM': message}
                         else:
                             data = {'question': question,
                                     'winner': winner, 'correct': True}
                     return JsonResponse(data)
             else:
-                data = {'None': 'Yes'}
+                data = {'correct': 'False',
+                        'errorM': 'Input Field is empty!', 'customCode': 30}
                 return JsonResponse(data)
         else:
-            data = {'None': 'Yes'}
+            data = {'correct': 'False',
+                    'errorM': 'Input Field is empty!', 'customCode': 30}
             return JsonResponse(data)
     else:
         if checkForWin(profile):

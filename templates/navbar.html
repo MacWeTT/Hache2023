@@ -1,18 +1,75 @@
+{%load static%}
+
+{%block style%}
+<link rel="stylesheet" href="{%static 'css/mobile.css'%}">
+{%endblock style%}
 <nav>
-    <h2 style="display: flex; justify-content: space-between;">
-        <a href="{%url 'landing'%}">HACHE</a>
-
+    <div class="acm-logo">
         {%if user.is_authenticated%}
-        <img src="{{user.profile.avatar.url}}" alt="{{user.username}}" width="50px" height="50px">
-        <a href="{%url 'profile' username=user.username%}">Profile</a>
-        <a href="{%url 'quiz'%}">Quiz</a>
-        <a href="{%url 'logout'%}">Logout</a>
+        <a href="{%url 'home'%}">
+            <img src="{%static 'assets/images/acm.svg'%}" alt="ACM JUIT">
+        </a>
         {%else%}
-        <a href="{%url 'login'%}">Login</a>
-        <a href="{%url 'signup'%}">SignUp</a>
+        <a href="{%url 'landing'%}">
+            <img src="{%static 'assets/images/acm.svg'%}" alt="ACM JUIT">
+        </a>
         {%endif%}
+    </div>
+    <div class="nav-links-main">
+        <div class="nav-link"><a href="{%url 'rules'%}">Rules</a></div>
+        <div class="nav-link"><a href="{%url 'hackerboard'%}">Hackerboard</a></div>
+        {%if user.is_authenticated%}
+        <div class="nav-link"><a href="{%url 'quiz'%}">Quiz</a></div>
+        {%endif%}
+    </div>
+    <div class="nav-links-user">
+        {%if user.is_authenticated%}
+        <div class="avatar">
+            <a href="{%url 'profile' username=user.username%}"><img src="{{user.profile.avatar.url}}"
+                    alt="{{user.username}}"></a>
+        </div>
+        <div class="nav-link"><a href="{%url 'logout'%}">Logout</a></div>
+        {%else%}
+        <div class="nav-link"><a href="{%url 'login'%}">Login</a></div>
+        <div class="nav-link"><a href="{%url 'signup'%}">SignUp</a></div>
+        {%endif%}
+    </div>
+    <span class="material-symbols-outlined icon">
+        menu
+    </span>
 
-        <a href="{%url 'home'%}">Home</a>
-
-    </h2>
+    <div class="sidebar">
+        <h1>
+            {%if user.is_authenticated%}
+            <a href="{%url 'home'%}">Hache</a>
+            {%else%}
+            <a href="{%url 'landing'%}">Hache</a>
+            {%endif%}
+        </h1>
+        <div class="nav-links-main_mobile-menu">
+            <div class="nav-link"><a href="{%url 'rules'%}"><span
+                        class="material-symbols-outlined">quick_reference_all</span>Rules</a></div>
+            <div class="nav-link"><a href="{%url 'hackerboard'%}"><span
+                        class="material-symbols-outlined">leaderboard</span>Hackerboard</a></div>
+            {%if user.is_authenticated%}
+            <div class="nav-link"><a href="{%url 'quiz'%}"><span class="material-symbols-outlined">quiz</span>Quiz</a>
+            </div>
+            {%endif%}
+        </div>
+        <div class="nav-links-user_mobile-menu">
+            {%if user.is_authenticated%}
+            <div class="avatar">
+                <a href="{%url 'profile' username=user.username%}"><img src="{{user.profile.avatar.url}}"
+                        alt="{{user.username}}"></a>
+            </div>
+            <div class="nav-link"><a href="{%url 'logout'%}"><span
+                        class="material-symbols-outlined">logout</span>Logout</a></div>
+            {%else%}
+            <div class="nav-link"><a href="{%url 'login'%}"><span
+                        class="material-symbols-outlined">login</span>Login</a></div>
+            <div class="nav-link"><a href="{%url 'signup'%}"><span
+                        class="material-symbols-outlined">register</span>SignUp</a></div>
+            {%endif%}
+        </div>
+    </div>
 </nav>

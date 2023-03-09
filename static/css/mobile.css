@@ -1,0 +1,41 @@
+@media only screen and (max-width: 768px) {
+    .nav-links-main {
+        display: none;
+    }
+
+    .sidebar {
+        position: absolute;
+        margin-top: -16px;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 40vw;
+        background-color: grey;
+        padding: 16px;
+    }
+
+    .sidebar h1 {
+        text-align: center;
+        font-size: 48px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    span .icon {
+        display: none;
+    }
+
+    .sidebar {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .nav-links-user {
+        display: none;
+    }
+
+    .sidebar {
+        width: 100vw;
+    }
+}

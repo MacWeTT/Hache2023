@@ -1,33 +1,53 @@
 {%extends 'index.html'%}
-
+{%load static%}
 {%block content%}
 
-<h1>{{profile.user.username}}'s Profile</h1>
-<p>{{profile.name}}</p>
-<p>{{profile.user.email}}</p>
-<p>CTF's Captured: {{profile.}}</p>
-<p>{{profile.bio}}</p>
+<div class="profile">
+    <div class="profile-details">
+        <div class="profile_user-details">
+            <h1>{{profile.user.username}}'s Profile</h1>
+            <p> <strong>Name: </strong>{{profile.user.first_name}} {{profile.user.last_name}} </p>
+            <p><strong>CTF's Captured:</strong>
+                {{profile.correct}} out of {{profile.total_questions}}</p>
+            <p><strong>Bio:</strong><br>
+                {{profile.bio}}
+            </p>
+        </div>
+        <div class="profile_user-avatar">
+            <img src="{{profile.avatar.url}}" alt="{{profile.user.username}}">
+        </div>
 
-<h2>Quiz Analysis</h2>
+    </div>
+    <div class="profile_quiz-details">
+        <h2>Quiz Analysis</h2>
 
-{%if profile.winner %}
-<p>Winner</p>
-{%else %}
-<p>Still in the game</p>
-{%endif%}
+        <p><strong>Quiz Status:</strong>
+            {%if profile.winner %}
+            Winner
+            {%else %}
+            Still in the game
+            {%endif%}
+        </p>
 
-{%if profile.verified %}
-<p>Verified</p>
-{%else %}
-<p>Not Verified</p>
-{%endif%}
+        <p><strong>Profile Status:</strong>
+            {%if profile.verified %}
+            Verified
+            {%else %}
+            Not Verified
+            {%endif%}
+        </p>
 
-<p>Score : {{profile.score}}</p>
-<p>Last Question Time: {{profile.lastQuestionTime}}</p>
-<h3>
-    <a href="{%url 'editprofile' %}">
-        Update Profile
-    </a>
-</h3>
+        <p> <strong>Score :</strong>
+            {{profile.score}}
+        </p>
+        <p><strong>Last Question Time:</strong>
+            {{profile.lastQuestionTime}}</p>
+        <h3>
+            {%if request.user.username == profile.user.username %}
+            <a class="other-link" href="{%url 'editprofile' %}">Update Profile</a>
+            {%endif%}
+        </h3>
+    </div>
+</div>
 
 {%endblock%}

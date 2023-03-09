@@ -1,20 +1,33 @@
-{%extends 'index.html'%}
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
 
-{%block content%}
+<div class="container">
+    <div class="quiz">
+        <div id="response" style="text-align: center;"></div>
+        <h1>Question {{question.questionNum}}</h1>
+        <p>{{question.text}}</p>
+        <h2>Assets</h2>
+        <br>
+        <input type="text" class="" id="user-input" placeholder="Enter Your Answer Here..."
+            aria-label="Enter Your Answer Here...">
+        <br><br>
+        <div class="button-group">
+            <button id="button-check" type="button" class="button button-check check">Check</button>
+            {% if hint != null %}
+            <button id="buttonHint" type="button" class="button button-hint">Hint!!</button>
+            {% endif %}
 
-<h1>Quiz</h1>
-<h2>Question {{question.questionNum}}</h2>
+        </div>
+        {{ hint|json_script:"hint" }}
+        <form id="answer-form" action="{%url 'quiz'%}" method="post" style="display: none">
+            {%csrf_token%}
+            {{form}}
+        </form>
+    </div>
+</div>
+{% endblock content %}
+{% block script %}
 
-<p>{{question.text}}</p>
-
-<form action="{%url 'quiz'%}" method="post">
-    {%csrf_token%}
-    {{form}}
-    <br>
-    Hint: {{hint}}
-    <br>
-    <input type="submit" value="Check">
-</form>
-
-
-{%endblock%}
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock script %}

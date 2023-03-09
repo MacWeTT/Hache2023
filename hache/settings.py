@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
+    'crispy_forms',
     'quizapp.apps.QuizappConfig',
 ]
 
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'hache.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,8 +119,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_ROOT = BASE_DIR / 'static/assets'  # Directory where uploaded media is saved.
-MEDIA_URL = '/assets/' # Public URL at the browser
+# Directory where uploaded media is saved.
+MEDIA_ROOT = BASE_DIR / 'static/assets'
+MEDIA_URL = '/assets/'  # Public URL at the browser
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static'

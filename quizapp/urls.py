@@ -11,6 +11,8 @@ urlpatterns = [
 
     path('', views.Landing, name='landing'),
     path('home/', views.HomePage, name="home"),
+    path('rules/', views.Rules, name='rules'),
+    path('hackerboard', views.Hackerboard, name='hackerboard'),
 
     path('quiz/', views.QuizView, name='quiz'),
     path('winner/', views.WinnerView, name='winner')

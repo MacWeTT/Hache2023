@@ -1,7 +1,25 @@
 {%extends 'index.html'%}
-
+{% load static %}
 {%block content%}
 
-<h1>Welcome to Hache</h1>
+<main>
+    <div class="container">
+        <div class="countdown">
+            <h1 class="term">root@hache:~$</h1>
+            <div class="countdown-main">
+                <ul>
+                    <li><span id="days">88</span>Days</li>
+                    <li><span id="hours">88</span>Hours</li>
+                    <li><span id="minutes">88</span>Minutes</li>
+                    <li><span id="seconds">88</span>Seconds</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main-logo">
+        <img src="{%static 'assets/images/logo.svg'%}" alt="HACHE 2023">
+    </div>
+</main>
 
-{%endblock%}
+
+{%endblock content%}
