@@ -51,6 +51,11 @@ nav {
     position: inherit;
 }
 
+.hamburger {
+    display: none;
+}
+
+
 .acm-logo {
     display: flex;
     width: 10rem;
@@ -137,9 +142,9 @@ main {
     justify-content: space-around;
 }
 
-main>div {
+/* main>div {
     height: 60vh;
-}
+} */
 
 .main-logo>img {
     width: 100%;
@@ -306,9 +311,28 @@ footer {
     cursor: pointer;
 }
 
+.button-group {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.button-check,
+.button-hint {
+    background-color: transparent;
+    border: none;
+    color: blue;
+    font-size: 18px;
+    transition: all 1s ease;
+}
+
+.button-check:hover,
+.button-hint:hover {
+    transition: all 1s ease;
+    border-bottom: 1px solid blue;
+}
+
 form label {
     font-size: 24px;
-    /* text-align: center; */
     margin: 18px auto;
     color: blue;
     cursor: pointer;
@@ -318,6 +342,17 @@ form label {
 form input>text {
     width: 60vw;
     padding: 20px;
+}
+
+.quiz-input {
+    padding: 0.75rem;
+    font-family: inherit;
+    border-radius: 10px;
+    border: 1px solid transparents;
+}
+
+.quiz-input:focus {
+    outline: none;
 }
 
 .quiz p {
@@ -330,7 +365,8 @@ form input>text {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 45vw;
+    width: 70vw;
+    margin: auto;
 }
 
 .hackerboard_table {
@@ -338,6 +374,8 @@ form input>text {
     border-radius: 15px;
     padding: 20px;
     overflow-y: scroll;
+    align-self: center;
+    width: 70vw;
 }
 
 #myChart {
@@ -347,8 +385,13 @@ form input>text {
 
 table {
     text-align: center;
+    margin: auto;
 }
 
+.table-heading {
+    text-align: center;
+    font-size: 3rem;
+}
 
 th {
     border-bottom: 2px solid white;
@@ -369,5 +412,17 @@ caption {
 @media screen and (max-width: 900px) {
     .hackerboard_chart_div {
         display: none !important;
+    }
+
+    main {
+        flex-direction: column;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    main {
+        flex-direction: column;
+        margin: auto;
     }
 }

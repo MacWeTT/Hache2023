@@ -1,4 +1,5 @@
-
+// const sidebar = document.getElementsByClassName('sidebar');
+// sidebar.style.transform = "translateX(40vw)";
 
 const answerField = document.getElementById("user-input");
 const hint = document.getElementById("hint").textContent;
