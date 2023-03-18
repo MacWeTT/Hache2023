@@ -235,17 +235,21 @@ footer {
 
 /* Rules */
 .rules {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+
     max-width: 90vw;
-    margin: auto auto;
+    margin:3rem;
     font-size: 18px;
+}
+.rules h1,.rules h2{
+    text-align: center;
 }
 
 .rule-container ul li {
     text-decoration: none;
     list-style: inside;
+}
+.rules p{
+    text-align: center;
 }
 
 /* Profile */
