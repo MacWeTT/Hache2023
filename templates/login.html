@@ -1,17 +1,20 @@
 {%extends 'index.html'%}
 
 {%block content%}
+<div class="login-form">
+    <h1>Login karlo frens</h1>
+    <form method="post">
+        {%csrf_token%}
+        
+        <label for="username">Username: </label>
+        <input type="text" name="username" placeholder="Enter username">
+        <br>
+        <label for="password">Password: </label>
+        <input type="password" name="password" placeholder="Enter password">
 
-<h1>Login karlo frens</h1>
-<form method="post">
-    {%csrf_token%}
-    <label for="username">Username: </label>
-    <input type="text" name="username" placeholder="Enter username">
-    <br>
-    <label for="password">Password: </label>
-    <input type="password" name="password" placeholder="Enter password">
+        <input type="submit" value="Login">
 
-    <input type="submit" value="Login">
-</form>
+    </form>
+</div>
 
 {%endblock%}
