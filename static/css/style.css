@@ -237,10 +237,12 @@ footer {
 .rules {
 
     max-width: 90vw;
-    margin:3rem;
+    margin: 3rem;
     font-size: 18px;
 }
-.rules h1,.rules h2{
+
+.rules h1,
+.rules h2 {
     text-align: center;
 }
 
@@ -248,17 +250,20 @@ footer {
     text-decoration: none;
     list-style: inside;
 }
-.rules p{
+
+.rules p {
     text-align: center;
 }
+
 /* login */
-.login-form{
+.login-form {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.076) 22.36%, rgba(255, 255, 255, 0.126) 42.79%, rgba(255, 255, 255, 0.08) 72.78%);
     border-radius: 17px;
     padding: 40px;
 }
+
 .login-input {
-    
+
     width: 100%;
     padding: 0.75rem;
     font-family: inherit;
@@ -268,12 +273,18 @@ footer {
 
 .login-input:focus {
     outline: none;
-    
+
 }
-.login-btn{
-     
-    margin-top: 0.5rem;
-   padding: 0.5rem;
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.login-btn {
+    font-family: inherit;
+    background-color: transparent;
+    margin-top: 1rem;
 }
 
 /* Profile */

@@ -2,7 +2,8 @@
 
 {%block content%}
 <div class="login-form">
-    <h1>Login karlo frens</h1>
+    <h1>Login To Hache</h1>
+    <br>
     <form method="post">
         {%csrf_token%}
         <label for="username">Username: </label>
@@ -13,8 +14,9 @@
         <br>
         <input type="password" class="login-input" name="password" placeholder="Enter password">
         <br>
-        
-        <input type="submit" class="login-btn" value="Login">
+        <div class="submit-btn">
+            <input type="submit" class="login-btn other-link" value="Login">
+        </div>
 
     </form>
 </div>
