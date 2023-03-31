@@ -65,7 +65,7 @@ nav {
     width: max-content;
 }
 
-.acm-logo a>img {
+.acm-logo a > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -95,7 +95,7 @@ nav {
     height: 50px;
 }
 
-.avatar a>img {
+.avatar a > img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -103,7 +103,7 @@ nav {
     transition: 0.3s ease-in-out;
 }
 
-.avatar a>img:hover {
+.avatar a > img:hover {
     border: 2px solid white;
 }
 
@@ -150,7 +150,7 @@ main {
     height: 60vh;
 } */
 
-.main-logo>img {
+.main-logo > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -264,7 +264,7 @@ footer {
 
 .login-input {
 
-    width: 100%;
+    /* width: 100%; */
     padding: 0.75rem;
     font-family: inherit;
     border-radius: 10px;
@@ -382,7 +382,7 @@ form label {
     font-weight: 400;
 }
 
-form input>text {
+form input > text {
     width: 60vw;
     padding: 20px;
 }
