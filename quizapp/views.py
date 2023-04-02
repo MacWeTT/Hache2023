@@ -17,6 +17,8 @@ import re
 
 
 IST = pytz.timezone('Asia/Kolkata')
+starttime = IST.localize(datetime(2023, 4, 8, 16, 00, 0, 0))
+endtime = IST.localize(datetime(2023, 4, 8, 16, 0, 0, 0))
 
 
 def Landing(request):
@@ -135,9 +137,17 @@ requestMessages = [
 ]
 
 randomMessages = [
-    'Think Harder!',
-    'Aaj aaj mei hojaega?',
-    'Thoda koshish toh karlo bhai',
+    'Sorry, You Need To Think Harder.',
+    'Sorry to say, but you ain\'t even close',
+    'Close enough, or are you?',
+    'Tired of guessing the wrong answer? Try writing the correct one',
+    'Might be the right time to put on that thinking cap',
+    'Psst, sure you Googled it correct?',
+    'tch tch',
+    'Did you try Elon Musk though?',
+    'You know, they say Blockchain is the answer to everything',
+    'We can neither confirm nor deny that you\'re on the right track',
+    'get clever guys, show why it\'s an ACM event'
 ]
 
 

@@ -135,7 +135,8 @@ function createBalloons(num) {
         var balloon = document.createElement("div");
         balloon.className = "balloon";
         balloon.id = `balloon${i}`
-        balloon.style.cssText = getRandomStyles(); balloonContainer.append(balloon);
+        balloon.style.cssText = getRandomStyles();
+        balloonContainer.append(balloon);
     }
 
     setTimeout(deleteballons, 6000);
