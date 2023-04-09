@@ -89,7 +89,7 @@ def SignUpPage(request):
             return redirect('home')
         else:
             messages.error(
-                request, 'An error occured. Check if passwords match.')
+                request, 'An error occured. Check if passwords match.') 
 
     else:
         form = MyUserCreationForm()
@@ -160,7 +160,7 @@ swears = [
 ]
 
 
-@login_required
+# @login_required
 def checkForWin(profile):
     if profile.correct == profile.total_questions:
         profile.winner = True
@@ -170,7 +170,7 @@ def checkForWin(profile):
         return False
 
 
-@login_required
+@login_required(login_url='login')
 def WinnerView(request):
     winner = request.user.profile.winner
     if winner:
@@ -179,7 +179,7 @@ def WinnerView(request):
         return redirect('/')
 
 
-@login_required
+# @login_required
 def getObj(profile):
     questionObj = Question.objects.get(questionNumber=profile.question_id)
     return questionObj

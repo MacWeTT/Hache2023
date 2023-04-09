@@ -63,3 +63,11 @@ class inputQuestions(models.Model):
 
     def __str__(self):
         return f'{self.user} on {self.textTime} answered = {self.textAnswer}'
+
+
+class VeriedEmails((models.Model)):
+    email = models.EmailField(max_length=200)
+    is_player = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.email

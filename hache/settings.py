@@ -24,9 +24,9 @@ SECRET_KEY = 'django-insecure-cp3ca=c2bm^f_z_110t7aadxuitvx7@=4%36*n^2%0*19d#5uq
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = []
-
+DEBUG_PROPAGATE_EXCEPTIONS = True
 
 # Application definition
 
@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'crispy_forms',
+    # 'crispy_forms',
+    # 'crispy_bootstrap4',
     'quizapp.apps.QuizappConfig',
 ]
 
@@ -117,7 +117,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
+STATIC_ROOT = "staticfiles"
 STATIC_URL = 'static/'
 # Directory where uploaded media is saved.
 MEDIA_ROOT = BASE_DIR / 'static/assets'
@@ -133,4 +133,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_ALLOWED_TEMPLATE_PACK = 'bootstrap4'
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
