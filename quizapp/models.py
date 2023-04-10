@@ -65,7 +65,7 @@ class inputQuestions(models.Model):
         return f'{self.user} on {self.textTime} answered = {self.textAnswer}'
 
 
-class VeriedEmails((models.Model)):
+class VerifedEmails(models.Model):
     email = models.EmailField(max_length=200)
     is_player = models.BooleanField(default=False)
 

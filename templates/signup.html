@@ -4,8 +4,12 @@
 <div class="login-form">
     <h1>SignUp for HACHE</h1>
     <br>
+    <form method="post">
+        {%csrf_token%}
+        {{form}}
+    </form>
 
-    <form method="POST">
+    <!-- <form method="POST">
         {%csrf_token%}
         <p>
             <label for="id_username">Username:</label>
@@ -55,7 +59,7 @@
         </p>
         <br>
         <input type="submit" class="login-btn other-link" value="Sign Up">
-    </form>
+    </form> -->
 </div>
 
 {%endblock%}

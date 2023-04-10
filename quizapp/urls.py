@@ -8,6 +8,7 @@ urlpatterns = [
     path('logout/', views.LogoutUser, name='logout'),
     path('profile/<str:username>/', views.ViewProfile, name='profile'),
     path('edit-profile/', views.EditProfile, name='editprofile'),
+    path('onboarding/', views.onboardingView, name='onboarding'),
 
     path('', views.Landing, name='landing'),
     path('home/', views.HomePage, name="home"),
