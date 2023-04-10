@@ -2,22 +2,45 @@
 {%load static%}
 
 {%block content%}
+<link rel="stylesheet" href="{% static 'css/game.css' %}">
 <main>
     <div class="countdown">
         <h1>Welcome to Hache {{user.username}} !</h1>
-        <h1 class="term">root@hache:~$</h1>
-        <div class="countdown-main">
-            <ul>
-                <li><span id="days">88</span>Days</li>
-                <li><span id="hours">88</span>Hours</li>
-                <li><span id="minutes">88</span>Minutes</li>
-                <li><span id="seconds">88</span>Seconds</li>
-            </ul>
+        <h2>Hache 2023 will start at 18:00 on 13rd April 2023.</h2>
+        <br>
+        <div class="game">
+            <div class="score-div">
+                <h3 class="highescore">Your Score:
+                    <span class="score">0</span>
+                </h3>
+            </div>
+
+            <div class="stage"></div>
         </div>
-    </div>
-    <div class="main-logo">
-        <img src="{%static 'assets/images/logo.svg'%}" alt="HACHE 2023">
     </div>
 </main>
 
-{%endblock%}
+{%endblock content%}
+
+{%block script%}
+<script>
+    var countDownDate = new Date("April 12, 2023 16:00:00").getTime();
+
+    var x = setInterval(function () {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        // If the count down is over, write some text
+    }, 1000);
+
+</script>
+{%endblock script%}

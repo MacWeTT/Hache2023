@@ -150,5 +150,11 @@ function deleteballons() {
     }
 }
 
+const container = document.querySelector('.fireworkss')
+
+const fireworks = new Fireworks(container, { /* options */ })
+
+fireworks.start()
+
 
 

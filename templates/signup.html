@@ -1,12 +1,14 @@
 {%extends 'index.html'%}
 {%block content %}
+{%load crispy_forms_tags%}
 
 <div class="login-form">
     <h1>SignUp for HACHE</h1>
     <br>
     <form method="post">
         {%csrf_token%}
-        {{form}}
+        {{form | crispy}}
+        <input type="submit" class="login-btn other-link" value="Sign Up">
     </form>
 
     <!-- <form method="POST">
@@ -16,24 +18,15 @@
             <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username">
 
             <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
-
-
         </p>
-
-
         <p>
             <label for="id_email">Email address:</label>
             <input type="email" name="email" maxlength="254" id="id_email">
-
-
         </p>
-
-
         <p>
             <label for="id_password1">Password:</label>
             <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1"
                 aria-autocomplete="list">
-
             <span class="helptext"></span>
         </p>
         <ul>
@@ -42,11 +35,7 @@
             <li>Your password can’t be a commonly used password.</li>
             <li>Your password can’t be entirely numeric.</li>
         </ul>
-
-
         <p></p>
-
-
         <p>
             <label for="id_password2">Password confirmation:</label>
             <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
@@ -58,7 +47,6 @@
 
         </p>
         <br>
-        <input type="submit" class="login-btn other-link" value="Sign Up">
     </form> -->
 </div>
 
