@@ -1,5 +1,12 @@
-// const sidebar = document.getElementsByClassName('sidebar');
-// sidebar.style.transform = "translateX(40vw)";
+const mobileNav = document.querySelector('.mobile-nav');
+function toggleNav() {
+    mobileNav.classList.toggle('hidden');
+}
+const navBtnOpen = document.querySelector('.mobile-nav-btn');
+navBtnOpen.addEventListener('click', toggleNav);
+
+const navBtnClose = document.querySelector('.mobile-nav-close-btn');
+navBtnClose.addEventListener('click', toggleNav)
 
 const answerField = document.getElementById("user-input");
 const hint = document.getElementById("hint").textContent;
@@ -149,12 +156,6 @@ function deleteballons() {
         balloon.remove()
     }
 }
-
-const container = document.querySelector('.fireworkss')
-
-const fireworks = new Fireworks(container, { /* options */ })
-
-fireworks.start()
 
 
 

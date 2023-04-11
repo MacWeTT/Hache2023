@@ -21,7 +21,7 @@ import re
 
 
 IST = pytz.timezone('Asia/Kolkata')
-starttime = IST.localize(datetime(2023, 4, 12, 18, 00, 0, 0))
+starttime = IST.localize(datetime(2023, 4, 10, 18, 00, 0, 0))
 endtime = IST.localize(datetime(2023, 4, 12, 18, 0, 0, 0))
 
 
@@ -108,7 +108,8 @@ def onboardingView(request):
         CLIENT_ID = request.POST["clientId"]
         idinfo = id_token.verify_oauth2_token(
             token, requests.Request(), CLIENT_ID, clock_skew_in_seconds=0)
-        if idinfo['email'] == profile.user.email and idinfo['hd'] == 'juitsolan.in':  # Your Custom Domain
+        print(idinfo)
+        if idinfo['email'] == profile.user.email:  # Your Custom Domain
             profile.verified = True
             profile.name = idinfo['name']
             profile.save()

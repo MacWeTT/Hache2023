@@ -16,16 +16,17 @@ function handleCredentialResponse(response) {
             } else {
                 iziToast.error({
                     position: 'topRight',
-                    message: "Please Use Your @juitsolan.in Email!!",
+                    message: response.message,
                 });
             }
 
         },
         error: function (response) {
             iziToast.error({
-                position: 'topRight',
-                message: "Please Use Your @juitsolan.in Email!!",
+                position: 'topLeft',
+                message: 'Something Went Wrong!!'
             });
         }
     });
 }
+
