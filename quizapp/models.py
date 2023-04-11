@@ -19,7 +19,7 @@ class Profile(models.Model):
     score = models.IntegerField(default=0)
     total_questions = models.IntegerField(
         verbose_name="Total Questions", default=question_count)
-    data = models.TextField(default="March 6, 2023 10:00:00")
+    data = models.TextField(default="April 12, 2023 18:00:00")
     correct = models.IntegerField(default=0)
     winner = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
@@ -65,7 +65,7 @@ class inputQuestions(models.Model):
         return f'{self.user} on {self.textTime} answered = {self.textAnswer}'
 
 
-class VerifedEmails(models.Model):
+class VerifiedEmails(models.Model):
     email = models.EmailField(max_length=200)
     is_player = models.BooleanField(default=False)
 

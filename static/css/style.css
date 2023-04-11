@@ -108,6 +108,16 @@ nav {
     color: white;
 }
 
+small,
+ul {
+    list-style: none;
+    margin: 1rem 0;
+}
+
+.form-text {
+    display: block;
+}
+
 .other-link {
     margin: 10px;
     padding: 10px;
@@ -265,23 +275,51 @@ footer {
 
 /* login */
 .login-form {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.076) 22.36%, rgba(255, 255, 255, 0.126) 42.79%, rgba(255, 255, 255, 0.08) 72.78%);
+    /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.076) 22.36%, rgba(255, 255, 255, 0.126) 42.79%, rgba(255, 255, 255, 0.08) 72.78%); */
     border-radius: 17px;
     padding: 2rem;
     margin: 1rem auto;
     max-width: 960px;
 }
 
-.login-input {
+.signup-form,
+.user_profile-form {
+    border-radius: 17px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 960px;
+}
+
+::-webkit-file-upload-button {
+    margin: 0.5rem;
+    padding: 0.3rem;
+    font-size: 18px;
+    border: 2px solid white;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    font-family: 'Chakra Petch', sans-serif;
+    color: black;
+}
+
+.login-input,
+.textinput,
+.emailinput,
+.passwordinput,
+textarea {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.5rem;
     font-family: inherit;
     border-radius: 10px;
     margin: 10px 0;
     border: 1px solid transparent;
 }
 
-.login-input:focus {
+.login-input:focus,
+.textinput:focus,
+.emailinput:focus,
+.passwordinput:focus,
+textarea {
     outline: none;
 
 }
@@ -482,4 +520,12 @@ caption {
         flex-direction: column;
         margin: auto;
     }
+}
+
+#credential_picker_container {
+    display: none;
+}
+
+.jumbotron {
+    padding: 1rem;
 }

@@ -5,6 +5,7 @@ from .models import Profile, inputQuestions, Question
 from django.contrib.auth import authenticate, login, logout
 from .forms import MyUserCreationForm, UserProfileForm, UserUpdateForm, AnswerForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordChangeView
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from datetime import datetime
@@ -103,7 +104,7 @@ def onboardingView(request):
         return redirect(reverse_lazy('quiz'))
 
     if is_ajax(request) and request.method == "POST":
-        token = request.POST["credential"] 
+        token = request.POST["credential"]
         CLIENT_ID = request.POST["clientId"]
         idinfo = id_token.verify_oauth2_token(
             token, requests.Request(), CLIENT_ID, clock_skew_in_seconds=0)
@@ -167,6 +168,11 @@ def EditProfile(request):
 
     context = {'u_form': u_form, 'p_form': p_form}
     return render(request, 'editprofile.html', context)
+
+
+class ChangePasswordView(PasswordChangeView):
+    template_name = 'passwordchange.html'
+    success_url = reverse_lazy('editprofile')
 
 
 # Request Messages
@@ -326,5 +332,3 @@ def QuizView(request):
             else:
                 context = {'question': question, 'form': form}
                 return render(request, 'quiz.html', context)
-
-    return redirect(reverse_lazy('onboarding'))

@@ -51,6 +51,7 @@
         <div class="mob-nav-link"><a href="{%url 'quiz'%}">Quiz</a></div>
         {%endif%}
         {%if user.is_authenticated%}
+        <div class="mob-nav-link"><a href="{%url 'profile' username=user.username%}">Profile</a></div>
         <div class="mob-nav-link"><a class="logout" href="{%url 'logout'%}">Logout</a></div>
         {%else%}
         <div class="mob-nav-link"><a href="{%url 'login'%}">Login</a></div>
