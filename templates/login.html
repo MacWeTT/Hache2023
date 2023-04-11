@@ -1,17 +1,24 @@
 {%extends 'index.html'%}
 
 {%block content%}
-
-<h1>Login karlo frens</h1>
-<form method="post">
-    {%csrf_token%}
-    <label for="username">Username: </label>
-    <input type="text" name="username" placeholder="Enter username">
+<div class="login-form">
+    <h1>Login To Hache</h1>
     <br>
-    <label for="password">Password: </label>
-    <input type="password" name="password" placeholder="Enter password">
+    <form method="post">
+        {%csrf_token%}
+        <label for="username">Username: </label>
+        <br>
+        <input type="text" class="login-input" name="username" placeholder="Enter username">
+        <br>
+        <label for="password">Password: </label>
+        <br>
+        <input type="password" class="login-input" name="password" placeholder="Enter password">
+        <br>
+        <div class="submit-btn">
+            <input type="submit" class="login-btn other-link" value="Login">
+        </div>
 
-    <input type="submit" value="Login">
-</form>
+    </form>
+</div>
 
 {%endblock%}

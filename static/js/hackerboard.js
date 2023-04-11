@@ -19,7 +19,7 @@ profiles.forEach((profile, index) => {
             };
             chartData.push(chat_data)
         }
-        profile.data[0][0] = "March 6, 2023 21:00:00"
+        profile.data[0][0] = "April 12, 2023 18:00:00"
         let starttime = new Date(profile.data[0][0])
         let endtime = new Date(profile.data[profile.data.length - 1][0])
 

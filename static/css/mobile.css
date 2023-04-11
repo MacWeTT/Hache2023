@@ -3,20 +3,75 @@
         display: none;
     }
 
-    .sidebar {
-        position: absolute;
-        margin-top: -16px;
+    .profile-details {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+    }
+
+    .profile_user-avatar {
+        display: none !important;
+    }
+
+    .mobile-btn {
+        display: flex;
+        justify-content: center;
+    }
+
+    .mobile-nav {
+        display: block;
+        position: fixed;
         top: 0;
         right: 0;
         height: 100vh;
         width: 40vw;
-        background-color: grey;
-        padding: 16px;
+        background-color: black;
+        z-index: 9999;
     }
 
-    .sidebar h1 {
-        text-align: center;
-        font-size: 48px;
+    .mobile-nav-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mobile-nav .mobile-btn {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 2rem;
+        padding-top: 2rem;
+    }
+
+    .mobile-nav-close-btn {
+        position: relative;
+        display: block;
+        margin-bottom: 5rem;
+    }
+
+    .mobile-nav-close-btn div {
+        position: absolute;
+        right: 4rem;
+        top: 2rem;
+
+    }
+
+    .mobile-nav div {
+        text-align: start;
+        font-size: 36px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .mob-nav-link {
+        justify-content: flex-start;
+        padding-left: 2rem;
+        padding-top: 2rem;
     }
 }
 
@@ -25,17 +80,18 @@
         display: none;
     }
 
-    .sidebar {
+    .mobile-nav {
         display: none;
     }
 }
+
 
 @media only screen and (max-width: 480px) {
     .nav-links-user {
         display: none;
     }
 
-    .sidebar {
+    .mobile-nav {
         width: 100vw;
     }
 }

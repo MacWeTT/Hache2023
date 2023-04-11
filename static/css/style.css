@@ -1,34 +1,19 @@
-* {
-    margin: 0px;
-    padding: 0px;
+*,
+*::after,
+*::before {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-*::-webkit-scrollbar {
-    background-color: grey;
-    border-radius: 3px;
-}
 
-*::-webkit-scrollbar-thumb {
-    background-color: black;
-    border: 2px solid grey;
-    border-radius: 3px;
-}
-
-/* Material Icons */
-.material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 300,
-        'GRAD' 0,
-        'opsz' 48;
-    transform: scale(1.5);
-}
-
-.icon {
-    position: absolute;
-    right: 5%;
-    top: 30%;
+.messages {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: auto 2rem;
+    list-style: none;
 }
 
 body {
@@ -51,6 +36,11 @@ nav {
     position: inherit;
 }
 
+.hamburger {
+    display: none;
+}
+
+
 .acm-logo {
     display: flex;
     width: 10rem;
@@ -60,7 +50,7 @@ nav {
     width: max-content;
 }
 
-.acm-logo a>img {
+.acm-logo a > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -90,7 +80,7 @@ nav {
     height: 50px;
 }
 
-.avatar a>img {
+.avatar a > img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -98,7 +88,7 @@ nav {
     transition: 0.3s ease-in-out;
 }
 
-.avatar a>img:hover {
+.avatar a > img:hover {
     border: 2px solid white;
 }
 
@@ -107,8 +97,7 @@ nav {
     justify-content: center;
 }
 
-.nav-link a,
-.other-link {
+.nav-link a {
     margin: 10px;
     padding: 10px;
     font-size: 18px;
@@ -119,7 +108,33 @@ nav {
     color: white;
 }
 
-.nav-link a {
+small,
+ul {
+    list-style: none;
+    margin: 1rem 0;
+}
+
+.form-text {
+    display: block;
+}
+
+.other-link {
+    margin: 10px;
+    padding: 10px;
+    font-size: 18px;
+    border: 2px solid white;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-link .logout {
+    border: 2px solid grey;
+}
+
+.nav-link a,
+.mob-nav-link a {
     color: white;
     text-decoration: none;
 }
@@ -131,17 +146,27 @@ nav {
     cursor: pointer;
 }
 
+.mobile-nav {
+    display: none;
+}
+
+.mobile-nav-btn {
+    display: none;
+}
+
+
+
 /* Landing-Main */
 main {
     display: flex;
     justify-content: space-around;
 }
 
-main>div {
+/* main>div {
     height: 60vh;
-}
+} */
 
-.main-logo>img {
+.main-logo > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -150,6 +175,8 @@ main>div {
 .container {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
     /* text-align: center; */
 }
 
@@ -165,8 +192,8 @@ main>div {
 }
 
 .countdown-main ul {
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     list-style: none;
 }
 
@@ -226,17 +253,82 @@ footer {
 
 /* Rules */
 .rules {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+
     max-width: 90vw;
-    margin: auto auto;
+    margin: 3rem;
     font-size: 18px;
+}
+
+.rules h1,
+.rules h2 {
+    text-align: center;
 }
 
 .rule-container ul li {
     text-decoration: none;
     list-style: inside;
+}
+
+.rules p {
+    text-align: center;
+}
+
+/* login */
+.login-form {
+    /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.076) 22.36%, rgba(255, 255, 255, 0.126) 42.79%, rgba(255, 255, 255, 0.08) 72.78%); */
+    border-radius: 17px;
+    padding: 2rem;
+    margin: 1rem auto;
+    max-width: 960px;
+}
+
+.signup-form,
+.user_profile-form {
+    border-radius: 17px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 960px;
+}
+
+::-webkit-file-upload-button {
+    margin: 0.5rem;
+    padding: 0.3rem;
+    font-size: 18px;
+    border: 2px solid white;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    font-family: 'Chakra Petch', sans-serif;
+    color: black;
+}
+
+.login-input,
+.textinput,
+.emailinput,
+.passwordinput,
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    font-family: inherit;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1px solid transparent;
+}
+
+.login-input:focus,
+.textinput:focus,
+.emailinput:focus,
+.passwordinput:focus,
+textarea {
+    outline: none;
+
+}
+
+
+.login-btn {
+    font-family: inherit;
+    background-color: transparent;
+    margin-top: 1rem;
 }
 
 /* Profile */
@@ -262,13 +354,14 @@ footer {
 .profile_user-avatar {
     display: flex;
     justify-content: flex-end;
+    border-radius: 9999px;
 }
 
 .profile_user-avatar img {
     width: 100px;
     height: 100px;
     border: 2px solid white;
-    border-radius: 5px;
+    border-radius: 9999px;
 }
 
 .profile_quiz-details h3 {
@@ -288,7 +381,7 @@ footer {
     margin: 0 auto;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.076) 22.36%, rgba(255, 255, 255, 0.126) 42.79%, rgba(255, 255, 255, 0.08) 72.78%);
     border-radius: 17px;
-    padding: 40px;
+    padding: 3rem;
 }
 
 .quiz h1 {
@@ -306,18 +399,49 @@ footer {
     cursor: pointer;
 }
 
+.button-group {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.button-check,
+.button-hint {
+    background-color: transparent;
+    border: none;
+    color: blue;
+    font-size: 18px;
+    transition: all 1s ease;
+}
+
+.button-check:hover,
+.button-hint:hover {
+    transition: all 1s ease;
+    border-bottom: 1px solid blue;
+}
+
 form label {
     font-size: 24px;
-    /* text-align: center; */
     margin: 18px auto;
     color: blue;
     cursor: pointer;
     font-weight: 400;
 }
 
-form input>text {
+form input > text {
     width: 60vw;
     padding: 20px;
+}
+
+.quiz-input {
+    padding: 0.75rem;
+    font-family: inherit;
+    border-radius: 10px;
+    border: 1px solid transparents;
+    width: 100%;
+}
+
+.quiz-input:focus {
+    outline: none;
 }
 
 .quiz p {
@@ -330,25 +454,35 @@ form input>text {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 45vw;
+    max-width: 90%;
+    margin: auto;
 }
 
-.hackerboard_table {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.076) 22.36%, rgba(255, 255, 255, 0.126) 42.79%, rgba(255, 255, 255, 0.08) 72.78%);
-    border-radius: 15px;
-    padding: 20px;
-    overflow-y: scroll;
+.hackerboard-details {
+    align-self: center;
+    width: 70vw;
+    margin-top: 3rem;
+}
+
+.hackerboard {
+    width: 70vw;
+    margin-top: 1rem;
 }
 
 #myChart {
-    width: 20rem;
+    min-width: 90%;
 }
 
 
 table {
     text-align: center;
+    margin: auto;
 }
 
+.table-heading {
+    text-align: center;
+    font-size: 3rem;
+}
 
 th {
     border-bottom: 2px solid white;
@@ -367,7 +501,31 @@ caption {
 
 
 @media screen and (max-width: 900px) {
-    .hackerboard_chart_div {
+    .hackerboard-details > canvas {
         display: none !important;
     }
+
+    .hackerboard-details {
+        width: 100%;
+    }
+
+    main {
+        flex-direction: column;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    main {
+        flex-direction: column;
+        margin: auto;
+    }
+}
+
+#credential_picker_container {
+    display: none;
+}
+
+.jumbotron {
+    padding: 1rem;
 }

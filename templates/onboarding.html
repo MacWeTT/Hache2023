@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1 class="text-center mb-5">Some Quick Verification!</h1>
+        <h4>(Verify Your Email {{ request.user.email }})</h4>
+        <p>Note: Without a verified e-mail, you won't be able to participate in the event.</p><br>
+        <script src="https://accounts.google.com/gsi/client"></script>
+        <div id="g_id_onload" data-client_id="6092565741-2c170am97rki68mnsgl3hj92sg0dajb9.apps.googleusercontent.com"
+            data-callback="handleCredentialResponse">
+        </div>
+        <div class="g_id_signin" data-type="standard"></div>
+        <br>
+        <p>Edit your Email: <strong class="text-primary"><a href="{% url 'profile' username=user.username%}"
+                    class="other-link">Edit
+                    Profile</a></strong></p>
+        <div id="responseG" style="display: block"></div>
+        {% csrf_token %}
+    </div>
+</div>
+{% endblock content %}

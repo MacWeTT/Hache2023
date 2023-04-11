@@ -1,13 +1,16 @@
 {%extends 'index.html'%}
-
 {%block content%}
+{%load crispy_forms_tags%}
 
-<h1>User Profile</h1>
-<form method="post" enctype="multipart/form-data">
-    {%csrf_token%}
-    {{u_form.as_p}}
-    {{p_form.as_p}}
-    <br>
-    <input type="submit" value="Update">
-</form>
+<div class="user_profile-form">
+    <h1>User Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        {{u_form | crispy}}
+        {{p_form | crispy}}
+        <br>
+        <input type="submit" class="login-btn other-link" value="Update">
+        <a class="other-link" href="{%url 'password_change' %}">Change Password</a>
+    </form>
+</div>
 {%endblock%}

@@ -1,4 +1,12 @@
+const mobileNav = document.querySelector('.mobile-nav');
+function toggleNav() {
+    mobileNav.classList.toggle('hidden');
+}
+const navBtnOpen = document.querySelector('.mobile-nav-btn');
+navBtnOpen.addEventListener('click', toggleNav);
 
+const navBtnClose = document.querySelector('.mobile-nav-close-btn');
+navBtnClose.addEventListener('click', toggleNav)
 
 const answerField = document.getElementById("user-input");
 const hint = document.getElementById("hint").textContent;
@@ -134,7 +142,8 @@ function createBalloons(num) {
         var balloon = document.createElement("div");
         balloon.className = "balloon";
         balloon.id = `balloon${i}`
-        balloon.style.cssText = getRandomStyles(); balloonContainer.append(balloon);
+        balloon.style.cssText = getRandomStyles();
+        balloonContainer.append(balloon);
     }
 
     setTimeout(deleteballons, 6000);

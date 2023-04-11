@@ -2,14 +2,18 @@
 {% load static %}
 {% block content %}
 
+
 <div class="container">
     <div class="quiz">
+        <div class="balloon-container"></div>
         <div id="response" style="text-align: center;"></div>
         <h1>Question {{question.questionNum}}</h1>
         <p>{{question.text}}</p>
-        <h2>Assets</h2>
+        {{%if question.asset%}}
+        <a target="_blank" href="{{%url 'question.asset'%}}">Assets</a>
+        {{%endif%}}
         <br>
-        <input type="text" class="" id="user-input" placeholder="Enter Your Answer Here..."
+        <input type="text" class="quiz-input" id="user-input" placeholder="Enter Your Answer Here..."
             aria-label="Enter Your Answer Here...">
         <br><br>
         <div class="button-group">
