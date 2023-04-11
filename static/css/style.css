@@ -1,24 +1,11 @@
-* {
-    margin: 0px;
-    padding: 0px;
+*,
+*::after,
+*::before {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-/* Material Icons */
-/* .material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 300,
-        'GRAD' 0,
-        'opsz' 48;
-    transform: scale(1.5);
-}
-
-.icon {
-    position: absolute;
-    right: 5%;
-    top: 30%;
-} */
 
 .messages {
     display: flex;
@@ -136,7 +123,8 @@ nav {
     border: 2px solid grey;
 }
 
-.nav-link a {
+.nav-link a,
+.mob-nav-link a {
     color: white;
     text-decoration: none;
 }
@@ -147,6 +135,16 @@ nav {
     /* transition: 0.3s ease-in-out; */
     cursor: pointer;
 }
+
+.mobile-nav {
+    display: none;
+}
+
+.mobile-nav-btn {
+    display: none;
+}
+
+
 
 /* Landing-Main */
 main {

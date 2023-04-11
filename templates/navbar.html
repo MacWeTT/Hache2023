@@ -34,5 +34,28 @@
         <div class="nav-link"><a href="{%url 'signup'%}">SignUp</a></div>
         {%endif%}
     </div>
+    <div class="mobile-nav-btn">
+        <i id="nav-btn-open" class="fa fa-bars" style="font-size: 36px; display: flex; align-items: center"></i>
+    </div>
+
+    <div class="mobile-nav hidden">
+        <span class="mobile-nav-close-btn">
+            <div>
+                <i id="nav-btn-close" class="fa fa-close"
+                    style="font-size: 36px; display: flex; align-items: center"></i>
+            </div>
+        </span>
+        <div class="mob-nav-link"><a href="{%url 'rules'%}">Rules</a></div>
+        <div class="mob-nav-link"><a href="{%url 'hackerboard'%}">Hackerboard</a></div>
+        {%if user.is_authenticated%}
+        <div class="mob-nav-link"><a href="{%url 'quiz'%}">Quiz</a></div>
+        {%endif%}
+        {%if user.is_authenticated%}
+        <div class="mob-nav-link"><a class="logout" href="{%url 'logout'%}">Logout</a></div>
+        {%else%}
+        <div class="mob-nav-link"><a href="{%url 'login'%}">Login</a></div>
+        <div class="mob-nav-link"><a href="{%url 'signup'%}">SignUp</a></div>
+        {%endif%}
+    </div>
 
 </nav>
