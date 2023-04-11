@@ -3,6 +3,16 @@
         display: none;
     }
 
+    .profile-details {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+    }
+
+    .profile_user-avatar {
+        display: none !important;
+    }
+
     .sidebar {
         position: absolute;
         margin-top: -16px;

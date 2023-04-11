@@ -15,6 +15,7 @@ urlpatterns = [
     path('rules/', views.Rules, name='rules'),
     path('hackerboard', views.Hackerboard, name='hackerboard'),
 
+    path('prestart/', views.preStartView, name='prestart'),
     path('quiz/', views.QuizView, name='quiz'),
     path('winner/', views.WinnerView, name='winner')
 ]

@@ -20,8 +20,8 @@ import re
 
 
 IST = pytz.timezone('Asia/Kolkata')
-starttime = IST.localize(datetime(2023, 4, 12, 16, 00, 0, 0))
-endtime = IST.localize(datetime(2023, 4, 12, 16, 0, 0, 0))
+starttime = IST.localize(datetime(2023, 4, 12, 18, 00, 0, 0))
+endtime = IST.localize(datetime(2023, 4, 12, 18, 0, 0, 0))
 
 
 def Landing(request):
@@ -82,11 +82,7 @@ def SignUpPage(request):
         form = MyUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(request, "Sign Up completed successfully.")
             return redirect('home')
         else:
@@ -107,11 +103,11 @@ def onboardingView(request):
         return redirect(reverse_lazy('quiz'))
 
     if is_ajax(request) and request.method == "POST":
-        token = request.POST["credential"]
+        token = request.POST["credential"] 
         CLIENT_ID = request.POST["clientId"]
         idinfo = id_token.verify_oauth2_token(
-            token, requests.Request(), CLIENT_ID)
-        if idinfo['email'] == profile.user.email and idinfo['hd'] == '@gmail.com':  # Your Custom Domain
+            token, requests.Request(), CLIENT_ID, clock_skew_in_seconds=0)
+        if idinfo['email'] == profile.user.email and idinfo['hd'] == 'juitsolan.in':  # Your Custom Domain
             profile.verified = True
             profile.name = idinfo['name']
             profile.save()
@@ -130,6 +126,20 @@ def HomePage(request):
         return render(request, 'home.html')
     else:
         return redirect(reverse_lazy('onboarding'))
+
+
+def preStartView(request):
+    if datetime.now(tz=IST) < starttime:
+        return redirect(reverse_lazy('home'))
+    return render(request, 'prestart.html')
+
+
+@login_required
+def concludeView(request):
+    if datetime.now(tz=IST) < endtime:
+        return redirect(reverse_lazy('home'))
+
+    return render(request, 'conclude.html')
 
 
 def ViewProfile(request, username):
@@ -162,7 +172,7 @@ def EditProfile(request):
 # Request Messages
 requestMessages = [
     'helpme',
-    'nhihora',
+    'nhihoraha',
 ]
 
 randomMessages = [
@@ -218,9 +228,14 @@ def getObj(profile):
 @login_required(login_url='login')
 def QuizView(request):
     profile = request.user.profile
-    old_id = profile.question_id
-
-    if profile.verified:
+    if not profile.verified:
+        return redirect(reverse_lazy('onboarding'))
+    if datetime.now(tz=IST) < starttime:
+        return redirect(reverse_lazy('prestart'))
+    elif datetime.now(tz=IST) > endtime:
+        return redirect(reverse_lazy('conclude'))
+    else:
+        old_id = profile.question_id
         if request.method == "POST":
             form = AnswerForm(request.POST)
             if form.is_valid():
