@@ -212,6 +212,7 @@ swears = [
     'chutiya',
     'madarchod',
     'behenchod',
+    'pussy'
 ]
 
 
@@ -289,7 +290,7 @@ def QuizView(request):
                         return JsonResponse(data)
                     if userAnswer.lower().startswith("flag{") != True:
                         data = {'correct': False,
-                                'errorM': "Submit in format: Flag{Your_Answer}"}
+                                'errorM': "Submit in format: flag{Your_Answer}"}
                         return JsonResponse(data)
 
                     else:
