@@ -10,7 +10,7 @@
         <h1>Question {{question.questionNum}}</h1>
         <p>{{question.text}}</p>
         {%if question.asset%}
-        <a target="_blank" href="{%url 'question.asset'%}">Assets</a>
+        <a target="_blank" href="{question.asset}">Assets</a>
         {%endif%}
         <br>
         <input type="text" class="quiz-input" id="user-input" placeholder="Enter Your Answer Here..."
