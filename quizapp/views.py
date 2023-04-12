@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import Profile, inputQuestions, Question
+from .models import Profile, inputQuestions, Question, VerifiedEmails
 from django.contrib.auth import authenticate, login, logout
 from .forms import MyUserCreationForm, UserProfileForm, UserUpdateForm, AnswerForm
 from django.contrib.auth.decorators import login_required
@@ -21,7 +21,7 @@ import re
 
 
 IST = pytz.timezone('Asia/Kolkata')
-starttime = IST.localize(datetime(2023, 4, 10, 18, 00, 0, 0))
+starttime = IST.localize(datetime(2023, 4, 12, 18, 00, 0, 0))
 endtime = IST.localize(datetime(2023, 4, 12, 18, 0, 0, 0))
 
 
@@ -102,13 +102,18 @@ def onboardingView(request):
     profile = request.user.profile
     if profile.verified == True:
         return redirect(reverse_lazy('quiz'))
-
-    if is_ajax(request) and request.method == "POST":
+    data = {'status': True}
+    try:
+        VerifiedEmails.objects.get(email=profile.user.email)
+    except Exception as error:
+        data = {'status': False}
+        return render(request, 'onboarding.html', data)
+    checkForVerification = VerifiedEmails.objects.get(email=profile.user.email)
+    if is_ajax(request) and request.method == "POST" and checkForVerification:
         token = request.POST["credential"]
         CLIENT_ID = request.POST["clientId"]
         idinfo = id_token.verify_oauth2_token(
             token, requests.Request(), CLIENT_ID, clock_skew_in_seconds=0)
-        print(idinfo)
         if idinfo['email'] == profile.user.email:  # Your Custom Domain
             profile.verified = True
             profile.name = idinfo['name']
@@ -189,7 +194,8 @@ randomMessages = [
     'Tired of guessing the wrong answer? Try writing the correct one',
     'Might be the right time to put on that thinking cap',
     'Psst, sure you Googled it correct?',
-    'tch tch tch',
+    'tch tch tch...too bad',
+    'Can\'t even get one right?',
     'You\'re not even trying, are you?',
     'Did you try Elon Musk though?',
     'You know, they say Blockchain is the answer to everything',
