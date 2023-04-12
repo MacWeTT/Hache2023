@@ -22,7 +22,7 @@ import re
 
 IST = pytz.timezone('Asia/Kolkata')
 starttime = IST.localize(datetime(2023, 4, 12, 18, 00, 0, 0))
-endtime = IST.localize(datetime(2023, 4, 12, 18, 0, 0, 0))
+endtime = IST.localize(datetime(2023, 4, 13, 18, 0, 0, 0))
 
 
 def Landing(request):
