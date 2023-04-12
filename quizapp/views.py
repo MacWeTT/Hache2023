@@ -294,7 +294,7 @@ def QuizView(request):
 
                     else:
                         correctAnswer = getObj(profile).answer
-                        if userAnswer.lower() == correctAnswer:
+                        if userAnswer == correctAnswer:
                             profile.question_id += 1
                             profile.score += 10
                             profile.correct += 1
