@@ -19,5 +19,6 @@ urlpatterns = [
 
     path('prestart/', views.preStartView, name='prestart'),
     path('quiz/', views.QuizView, name='quiz'),
+    path('conclude/', views.conclude, name='conclude'),
     path('winner/', views.WinnerView, name='winner')
 ]

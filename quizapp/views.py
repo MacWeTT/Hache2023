@@ -234,7 +234,12 @@ def WinnerView(request):
         return redirect('/')
 
 
+def conclude(request):
+    return render(request, 'conclude.html')
+
 # @login_required
+
+
 def getObj(profile):
     questionObj = Question.objects.get(questionNumber=profile.question_id)
     return questionObj
@@ -247,8 +252,8 @@ def QuizView(request):
         return redirect(reverse_lazy('onboarding'))
     if datetime.now(tz=IST) < starttime:
         return redirect(reverse_lazy('prestart'))
-    # elif datetime.now(tz=IST) > endtime:
-    #     return redirect(reverse_lazy('conclude'))
+    elif datetime.now(tz=IST) > endtime:
+        return redirect(reverse_lazy('conclude'))
     else:
         old_id = profile.question_id
         if request.method == "POST":
