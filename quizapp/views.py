@@ -118,6 +118,8 @@ def onboardingView(request):
             profile.verified = True
             profile.name = idinfo['name']
             profile.save()
+            checkForVerification.is_player = True
+            checkForVerification.save()
             data = {'status': True, 'message': "Succesfully Verified!!"}
         else:
             data = {'status': False,
@@ -291,7 +293,7 @@ def QuizView(request):
 
                     else:
                         correctAnswer = getObj(profile).answer
-                        if userAnswer.lower() == correctAnswer.lower():
+                        if userAnswer.lower() == correctAnswer:
                             profile.question_id += 1
                             profile.score += 10
                             profile.correct += 1
