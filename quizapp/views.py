@@ -22,7 +22,7 @@ import re
 
 IST = pytz.timezone('Asia/Kolkata')
 starttime = IST.localize(datetime(2023, 4, 12, 18, 00, 0, 0))
-endtime = IST.localize(datetime(2023, 4, 14, 18, 0, 0, 0))
+endtime = IST.localize(datetime(2023, 4, 13, 20, 30, 0, 0))
 
 
 def Landing(request):
@@ -251,6 +251,10 @@ def QuizView(request):
     profile = request.user.profile
     if not profile.verified:
         return redirect(reverse_lazy('onboarding'))
+    if datetime.now(tz=IST) < starttime:
+        return redirect(reverse_lazy('home'))
+    elif datetime.now(tz=IST) > endtime:
+        return redirect(reverse_lazy('conclude'))
     else:
         old_id = profile.question_id
         if request.method == "POST":
