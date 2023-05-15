@@ -22,7 +22,7 @@ The process to do so is very simple. All you have to do is:
 5. After the virtual environment starts running, run the command `pip install -r requirements.txt `.
    > This command will install all the required dependencies one by one in your virtual environment.
 6. Now, you have to initialize the database. Do so by running `python manage.py makemigrations` and then `python manage.py migrate`.
-7. Once the process is complete, your project is ready. Run it by typing `python manaage.py runserver`. It will run the application on `localhost:8000`.
+7. Once the process is complete, your project is ready. Run it by typing `python manage.py runserver`. It will run the application on `localhost:8000`.
 8. You can now open the application which is hosted on `port 8000` on your PC.
 
 
